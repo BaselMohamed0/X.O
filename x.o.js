@@ -18,12 +18,12 @@ let colom1 = [button1 , button4 , button7]
 let colom2 = [button2 , button5 , button8]
 let colom3 = [button3 , button6 , button9]
 
-
+let allGame = [button1 , button2 , button3 , button4 , button5 , button6 , button7 , button8 , button9]
 
 let x = "X";
 let o = "O"
 let answer = [];
-
+let gameOver = false;
 
 
 
@@ -72,6 +72,7 @@ function winFun(){
     function newGame(){
         window.location.reload();
     }
+    gameOver = true;
                
     // const winImg= document.createElement("img");
     // winImg.src = "/rageh/Hang-Man/images/Fireworks.png";
@@ -82,6 +83,8 @@ function winFun(){
 
 
 function win(){
+
+    if (gameOver) return;
 
     //------------------------------row X------------------------------------------
     if (button1.innerText == x && button2.innerText == x && button3.innerText == x ){
@@ -162,5 +165,16 @@ function win(){
     else if (button3.innerText == o && button5.innerText == o && button7.innerText == o ){
         document.getElementById("h1").innerHTML = "O Win"
         winFun()  
+    }
+   // ----------------------------------- Draw -------------------------------------------
+    else {
+        const isDraw = allGame.every(button => 
+            button.innerText === x || button.innerText === o
+        );
+
+        if (isDraw) {
+            document.getElementById("h1").innerHTML = "Game Over";
+            winFun();
+        }
     }
 }
